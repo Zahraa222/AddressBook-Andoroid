@@ -37,7 +37,6 @@ public class DialPage extends AppCompatActivity {
         callbtn = findViewById(R.id.callbtn);
         txt = findViewById(R.id.editTextPhone);
 
-
         alert = new AlertDialog.Builder(DialPage.this);
         alert.setTitle("Invalid Format");
         alert.setMessage("Phone Number Must be 10 digits long!");
@@ -72,6 +71,7 @@ public class DialPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String phone = txt.getText().toString();
+
                 if (phone.length() == 10){
                     Intent i = new Intent(Intent.ACTION_CALL);
                     i.setData((Uri.parse("tel:" + phone)));

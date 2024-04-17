@@ -1,5 +1,6 @@
 package com.example.addressbook;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -23,6 +25,8 @@ public class ContactsPage extends AppCompatActivity {
 
     Button editContacts;
     Button createContact;
+    AlertDialog.Builder alert;
+    int selectedPosition = -1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,9 +44,38 @@ public class ContactsPage extends AppCompatActivity {
         contactList.setAdapter(adapter);
 
         contactList.setOnItemClickListener((parent, view, position, id) -> {
+            selectedPosition = position;
             editContacts.setVisibility(View.VISIBLE);
         });
 
+        //alter for requesting edit, can either delete or add to favorites
+        alert = new AlertDialog.Builder(ContactsPage.this);
+        alert.setTitle("Edit Options");
+        alert.setMessage("Choose Whether you would Like to delete or add contact to Favorites.");
+        alert.setCancelable(false);
+        alert.setPositiveButton("Add to Favorites", (DialogInterface.OnClickListener) (dialog, which) ->{
+            //send to favorites with key or wotevah
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            intent.putExtra("new fave", contacts.get(selectedPosition));
+            startActivity(intent);
+            dialog.dismiss();
+        });
+        alert.setNegativeButton("Delete Contact", (DialogInterface.OnClickListener) (dialog, which) ->{
+            if (selectedPosition != -1){
+                contacts.remove(selectedPosition);
+                adapter.notifyDataSetChanged();
+                dialog.dismiss();
+            }
+
+        });
+        editContacts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog alertDialog = alert.create();
+                alertDialog.show();
+
+            }
+        });
 
         //nav bar handling
         nav = findViewById(R.id.bottom_navigation);

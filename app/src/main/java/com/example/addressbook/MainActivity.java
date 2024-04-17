@@ -33,6 +33,11 @@ public class MainActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_expandable_list_item_1, contacts);
         fave.setAdapter(adapter);
 
+        Intent intent = getIntent();
+        String new_fave = intent.getStringExtra("new fave");
+
+        contacts.add(new_fave);
+
         nav = findViewById(R.id.bottom_navigation);
         nav.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
