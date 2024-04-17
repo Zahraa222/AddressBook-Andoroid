@@ -36,7 +36,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String new_fave = intent.getStringExtra("new fave");
 
-        contacts.add(new_fave);
+        if (new_fave != null && !new_fave.isEmpty()) {
+            contacts.add(new_fave);
+            adapter.notifyDataSetChanged(); // Update the adapter to reflect the new item
+        }
 
         nav = findViewById(R.id.bottom_navigation);
         nav.setOnItemSelectedListener(item -> {
