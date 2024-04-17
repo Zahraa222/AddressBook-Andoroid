@@ -9,9 +9,9 @@
         android:icon="@drawable/contacts"
         android:title="Contacts" />
     <item
-        android:id="@+id/recent"
+        android:id="@+id/SMS"
         android:icon="@drawable/message"
-        android:title="Recent" />
+        android:title="SMS" />
     <item
         android:id="@+id/dial"
         android:icon="@drawable/keypad"

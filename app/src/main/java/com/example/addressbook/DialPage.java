@@ -56,7 +56,7 @@ public class DialPage extends AppCompatActivity {
             } else if (id == R.id.contacts) {
                 startActivity(new Intent(DialPage.this, ContactsPage.class));
                 return true;
-            } else if (id == R.id.recent) {
+            } else if (id == R.id.SMS) {
                 startActivity(new Intent(DialPage.this, RecentCalls.class));
                 return true;
             }

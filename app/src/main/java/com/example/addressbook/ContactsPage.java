@@ -27,7 +27,7 @@ public class ContactsPage extends AppCompatActivity {
             } else if (id == R.id.favorites) {
                 startActivity(new Intent(ContactsPage.this, MainActivity.class));
                 return true;
-            } else if (id == R.id.recent) {
+            } else if (id == R.id.SMS) {
                 startActivity(new Intent(ContactsPage.this, RecentCalls.class));
                 return true;
             }
