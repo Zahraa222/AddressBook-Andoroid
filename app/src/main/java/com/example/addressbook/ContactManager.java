@@ -7,10 +7,7 @@ public class ContactManager {
 
     private ContactManager(){
         contactsList = new ArrayList<>();
-
-        //sample entry for testing
-        contactsList.add("Testing Test");
-        contactsList.add("Sample Contact");
+        contactsList.add("Testing test");
     }
 
     //get class instance
@@ -28,4 +25,6 @@ public class ContactManager {
     public void addContact(String contact){
         contactsList.add(contact);
     }
+
+
 }
