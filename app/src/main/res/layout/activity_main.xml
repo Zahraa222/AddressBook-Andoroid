@@ -14,20 +14,26 @@
         android:layout_height="wrap_content"
         android:background="?android:attr/windowBackground"
         app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
         app:menu="@menu/navigationmenu"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="651dp" />
+        tools:ignore="MissingConstraints" />
 
     <ListView
         android:id="@+id/faveList"
         android:layout_width="413dp"
         android:layout_height="583dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginTop="132dp"
         android:foregroundGravity="top"
         android:textAlignment="gravity"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="-2dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView2"

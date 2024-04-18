@@ -28,7 +28,7 @@ public class ContactsPage extends AppCompatActivity {
     Button createContact;
     ArrayAdapter<String> adapter;
     EditText addName, addPhone;
-    AlertDialog.Builder alert;
+    AlertDialog.Builder alert, invalidPhone;
     AlertDialog.Builder dialog;
     int selectedPosition = -1;
     @Override
@@ -86,6 +86,16 @@ public class ContactsPage extends AppCompatActivity {
 
 
 
+        //alert for handling phone length
+        invalidPhone = new AlertDialog.Builder(ContactsPage.this);
+        invalidPhone.setTitle("Invalid Format");
+        invalidPhone.setMessage("Phone Number Must be 10 digits long!");
+        invalidPhone.setCancelable(false);
+        invalidPhone.setPositiveButton("Ok", (DialogInterface.OnClickListener) (dialog,which) ->{
+            dialog.cancel();
+        });
+
+
         //Handling create new contact button
         createContact.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,9 +111,14 @@ public class ContactsPage extends AppCompatActivity {
                         String name = addName.getText().toString();
                         String phone = addPhone.getText().toString();
                         if (!name.isEmpty() && !phone.isEmpty()){
-                            contacts.add(name + "\n" + phone);
-                            adapter.notifyDataSetChanged();
-
+                            if (phone.length() != 10){
+                                AlertDialog alertDialog = invalidPhone.create();
+                                alertDialog.show();
+                            }
+                            else{
+                                contacts.add(name + "\n" + phone);
+                                adapter.notifyDataSetChanged();
+                            }
                         }
                 });
                 dialog.setNegativeButton("Cancel", (DialogInterface.OnClickListener) (dialog, which) ->{

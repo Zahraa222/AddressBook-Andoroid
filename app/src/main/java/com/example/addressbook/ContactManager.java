@@ -9,7 +9,7 @@ public class ContactManager {
     private ContactManager(){
         contactsList = new ArrayList<>();
         favoritesList = new ArrayList<>();
-        contactsList.add("Testing test");
+        contactsList.add("Testing  \n 1234567890");
     }
 
     //get class instance
