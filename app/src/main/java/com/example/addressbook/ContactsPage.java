@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
@@ -25,7 +26,9 @@ public class ContactsPage extends AppCompatActivity {
 
     Button editContacts;
     Button createContact;
+    EditText addName, addPhone;
     AlertDialog.Builder alert;
+    AlertDialog.Builder dialog;
     int selectedPosition = -1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,7 @@ public class ContactsPage extends AppCompatActivity {
         editContacts = findViewById(R.id.edit);
         createContact = findViewById(R.id.create);
         contactList = findViewById(R.id.contactList);
+
 
         ContactManager manager = ContactManager.getContact();
         List<String> contacts = manager.getContactsList();
@@ -68,12 +72,42 @@ public class ContactsPage extends AppCompatActivity {
             }
 
         });
+
+
         editContacts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog alertDialog = alert.create();
                 alertDialog.show();
 
+            }
+        });
+
+
+
+        //Handling create new contact button
+        createContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog = new AlertDialog.Builder(ContactsPage.this);
+                View view = getLayoutInflater().inflate(R.layout.add_contact, null);
+                addName = findViewById(R.id.editTextName);
+                addPhone = findViewById(R.id.editTextPhone);
+                dialog.setView(view);
+                dialog.setCancelable(false);
+                dialog.setPositiveButton("Save", (DialogInterface.OnClickListener) (dialog, which) ->{
+                   String name = addName.getText().toString();
+                   String phone = addPhone.getText().toString();
+                   if (!name.isEmpty() && !phone.isEmpty()){
+                       manager.addContact(name + phone);
+                       adapter.notifyDataSetChanged();
+                   }
+                });
+                dialog.setNegativeButton("Cancel", (DialogInterface.OnClickListener) (dialog, which) ->{
+                    dialog.cancel();
+                });
+                AlertDialog alertDialog = dialog.create();
+                alertDialog.show();
             }
         });
 
@@ -92,7 +126,6 @@ public class ContactsPage extends AppCompatActivity {
                 return true;
             }
             return false;
-
         });
     }
 }
