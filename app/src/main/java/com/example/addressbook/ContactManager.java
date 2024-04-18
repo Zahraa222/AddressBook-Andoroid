@@ -4,9 +4,11 @@ import java.util.List;
 public class ContactManager {
     private static ContactManager contact;
     private List <String> contactsList;
+    private  List <String> favoritesList;
 
     private ContactManager(){
         contactsList = new ArrayList<>();
+        favoritesList = new ArrayList<>();
         contactsList.add("Testing test");
     }
 
@@ -20,6 +22,10 @@ public class ContactManager {
 
     public List<String> getContactsList() {
         return contactsList;
+    }
+
+    public  List<String> getFavoritesList(){
+        return favoritesList;
     }
 
     public void addContact(String contact){

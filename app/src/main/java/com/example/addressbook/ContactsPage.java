@@ -26,6 +26,7 @@ public class ContactsPage extends AppCompatActivity {
 
     Button editContacts;
     Button createContact;
+    ArrayAdapter<String> adapter;
     EditText addName, addPhone;
     AlertDialog.Builder alert;
     AlertDialog.Builder dialog;
@@ -44,7 +45,7 @@ public class ContactsPage extends AppCompatActivity {
         List<String> contacts = manager.getContactsList();
 
         //Array Adapter for displaying Contacts
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_expandable_list_item_1, contacts);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_expandable_list_item_1, contacts);
         contactList.setAdapter(adapter);
 
         contactList.setOnItemClickListener((parent, view, position, id) -> {
@@ -90,18 +91,20 @@ public class ContactsPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dialog = new AlertDialog.Builder(ContactsPage.this);
+                dialog.setTitle("Enter new Contact Info:");
                 View view = getLayoutInflater().inflate(R.layout.add_contact, null);
-                addName = findViewById(R.id.editTextName);
-                addPhone = findViewById(R.id.editTextPhone);
+                addName = view.findViewById(R.id.editTextName);
+                addPhone = view.findViewById(R.id.editTextPhoneNumber);
                 dialog.setView(view);
                 dialog.setCancelable(false);
                 dialog.setPositiveButton("Save", (DialogInterface.OnClickListener) (dialog, which) ->{
-                   String name = addName.getText().toString();
-                   String phone = addPhone.getText().toString();
-                   if (!name.isEmpty() && !phone.isEmpty()){
-                       manager.addContact(name + phone);
-                       adapter.notifyDataSetChanged();
-                   }
+                        String name = addName.getText().toString();
+                        String phone = addPhone.getText().toString();
+                        if (!name.isEmpty() && !phone.isEmpty()){
+                            contacts.add(name + "\n" + phone);
+                            adapter.notifyDataSetChanged();
+
+                        }
                 });
                 dialog.setNegativeButton("Cancel", (DialogInterface.OnClickListener) (dialog, which) ->{
                     dialog.cancel();

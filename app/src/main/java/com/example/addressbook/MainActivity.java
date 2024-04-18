@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         fave = findViewById(R.id.faveList);
 
         ContactManager manager = ContactManager.getContact();
-        List<String> contacts = manager.getContactsList();
+        List<String> contacts = manager.getFavoritesList();
 
         //Array Adapter for displaying Contacts
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_expandable_list_item_1, contacts);
